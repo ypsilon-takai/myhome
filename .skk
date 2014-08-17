@@ -1,0 +1,14 @@
+;; use DvorakJP
+(setq skk-use-dvojp t)
+ 
+;; か行をcで入れるときに辞書の送りがなをちゃんとする。
+(setq skk-okuri-char-alist '((\"c\" . \"k\")))
+ 
+;; 変換候補の選択キーをDvorakに合ったものにする。
+(setq skk-henkan-show-candidates-keys '(97 111 101 117 105 100 104 116 110 115 39 44 46 112 103 99 114 108 109 119 118))
+ 
+;; リターンで確定のみ
+(setq skk-egg-like-newline t)
+ 
+;; インジケータに色を付けない
+(setq skk-indicator-use-cursor-color nil)
