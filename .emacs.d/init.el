@@ -12,6 +12,9 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
+(set-default-coding-systems 'utf-8-unix)
+(setq default-file-name-coding-system 'japanese-cp932-dos)
+
 ;; theme path
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
@@ -94,6 +97,36 @@
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 (electric-indent-mode 1)
+
+;; expand-region
+(require 'expand-region)
+(global-set-key (kbd "C-,") 'er/expand-region)
+(global-set-key (kbd "C-M-,") 'er/contract-region) ;; リージョンを狭める
+(transient-mark-mode t)
+
+;; multiple-cursor
+(require 'multiple-cursors)
+(require 'smartrep)
+
+(global-unset-key "\C-t")
+(global-set-key (kbd "C-t") 'mc/edit-lines)
+
+(declare-function smartrep-define-key "smartrep")
+(smartrep-define-key global-map "C-."
+  '(("C-."      . 'mc/mark-next-like-this)
+    ("n"        . 'mc/mark-next-like-this)
+    ("p"        . 'mc/mark-previous-like-this)
+    ("a"        . 'mc/mark-all-in-region)
+    ("m"        . 'mc/mark-more-like-this-extended)
+    ("u"        . 'mc/unmark-next-like-this)
+    ("U"        . 'mc/unmark-previous-like-this)
+    ("s"        . 'mc/skip-to-next-like-this)
+    ("S"        . 'mc/skip-to-previous-like-this)
+    ("*"        . 'mc/mark-all-like-this)
+    ("d"        . 'mc/mark-all-like-this-dwim)
+    ("i"        . 'mc/insert-numbers)
+    ("o"        . 'mc/sort-regions)
+    ("O"        . 'mc/reverse-regions)))
 
 ;; clojur-mode
 (add-hook 'clojure-mode-hook 'paredit-mode)
